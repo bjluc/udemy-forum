@@ -27,7 +27,7 @@ class RepliesTableSeeder extends Seeder
         'content' => 'Sed ut massa massa. Ut varius purus sit amet magna porttitor, at commodo neque vestibulum.'
         ];
         $r4 = [
-        'user_id' => 4,
+        'user_id' => 2,
         'discussion_id' => 4,
         'content' => 'Sed ut massa massa. Ut varius purus sit amet magna porttitor, at commodo neque vestibulum. Fusce consectetur nulla tristique sem faucibus, ut molestie risus scelerisque. Ut mollis, nibh viverra finibus dictum.'
         ];

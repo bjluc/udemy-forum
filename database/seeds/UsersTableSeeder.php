@@ -22,10 +22,10 @@ class UsersTableSeeder extends Seeder
         ]);
 
       App\User::create([
-        'name' => 'Luc Audemard',
+        'name' => 'fred Audemard',
         'password' => bcrypt('secret'),
-        'email' => 'bjluc@bjluc.co.uk',
-        'avatar' => asset('avatars/1.jpg')
+        'email' => 'fred@hotmail.com',
+        'avatar' => asset('avatars/1.png')
 
 
         ]);
