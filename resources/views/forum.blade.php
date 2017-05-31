@@ -21,7 +21,8 @@
              {{ $d->title }}
          </h4>
             <p class="text-center">
-                {{ str_limit($d->content, 50) }}
+            {!! Markdown::convertToHtml(str_limit($d->content, 50)) !!}
+               {{--  {{ str_limit($d->content, 50) }} --}}
             </p>
         </div>
         <div class="panel-footer">
