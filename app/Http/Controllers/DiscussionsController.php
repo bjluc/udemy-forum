@@ -14,11 +14,8 @@ use Illuminate\Http\Request;
 class DiscussionsController extends Controller
 {
     public function create()
-
     {
-
-        return view('discussions.create');
-
+        return view('discuss');
     }
 
     public function store()
@@ -94,5 +91,24 @@ class DiscussionsController extends Controller
 
        return redirect()->back();
         
+    }
+    public function edit($slug)
+    {
+        return view('discussions.edit',['discussion' => Discussion::where('slug', $slug)->first()]);
+    }
+
+
+    public function update($id)
+    {
+        $this->validate(request(),[
+            'content' => 'required'
+            ]);
+        $d = Discussion::find($id);
+
+        $d->content = request()->content;
+        $d->save();
+
+        Session::flash('success', 'Discussion updated');
+        return redirect()->route('discussion',['slug' => $d->slug ]);
     }
 }

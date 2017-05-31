@@ -12,10 +12,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top">         
             <div class="container">
                 <div class="navbar-header">
 
@@ -70,7 +71,16 @@
                 </div>
             </div>
         </nav>
-
+         @if($errors->count() > 0)
+            <ul class="list-group-item">
+                @foreach($errors->all() as $error)
+                <li class="list-group-item text-danger">
+                    {{ $error }}
+                </li>
+                @endforeach
+            </ul>
+            <br>
+            @endif
         <div class="container">
             <div class="col-md-4">
                 <a href="{{ route('discussions.create') }}" class="form-control btn btn-primary">Create a new disscussion</a><br><br>
@@ -80,9 +90,29 @@
                         <ul class="list-group">
                         <li class="list-group-item">
                         <a href="/forum" style="text-decoration: none;">Home</a>
-                        </li>                        
+                        </li>
+                        <li class="list-group-item">
+                        <a href="/forum?filter=me" style="text-decoration: none;">My discussions</a>
+                        </li> 
+                        <li class="list-group-item">
+                        <a href="/forum?filter=solved" style="text-decoration: none;">Anwsered discussions</a>
+                        </li>
+                        <li class="list-group-item">
+                        <a href="/forum?filter=unsolved" style="text-decoration: none;">Unanwsered discussions</a>
+                        </li>                         
                         </ul>
                     </div>
+                        @if(Auth::check())
+                            @if(Auth::user()->admin)
+                                <div class="panel-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                        <a href="/channels" style="text-decoration: none;">All channels</a>
+                                        </li>                       
+                                    </ul>
+                                </div>
+                            @endif
+                        @endif
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -107,5 +137,11 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        @if(Session::has('success'))
+            toastr.success('{{ Session::get('success') }}')
+        @endif
+    </script>
 </body>
 </html>
